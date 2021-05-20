@@ -12,6 +12,7 @@ import tareaRutas from './rutas/tareaRutas';
 
 import multer from 'multer';
 import path from 'path';
+import presentarRutas from './rutas/presentRutas';
 
 const server = new Server();
 const config = require("./config");
@@ -41,7 +42,10 @@ server.app.use('/estudiante',usuarioRutas);
 server.app.use('/profe',profeRoutes);
 server.app.use('/materia',materiaRutas);
 server.app.use('/tarea',tareaRutas);
+server.app.use('/presentar',presentarRutas);
+
     //Public
+    
         server.app.use('/',express.static(path.join(__dirname,'public'))).get('/archivo/:archivoName', function(req,res){
             let archivoName : string = req.params.archivoName;
             res.sendFile(path.join(__dirname,`public/uploads/${archivoName}`));
