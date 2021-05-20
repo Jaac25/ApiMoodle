@@ -17,7 +17,7 @@ adminRoutes.get('/todos', function (req, res) {
     });
 });
 //Crear Admin
-adminRoutes.post('/crear', autentificacionProfe_1.verificarTokenProfe, function (req, res) {
+adminRoutes.post('/crear', function (req, res) {
     var nombresReq = req.body.nombres;
     var apellidosReq = req.body.apellidos;
     var documentoReq = req.body.documento;

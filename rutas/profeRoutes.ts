@@ -2,9 +2,7 @@ import { Router, Request, Response} from "express";
 import {Usuario} from '../modelos/usuario';
 
 import bcrypt from 'bcryptjs';
-import Token from "../clases/tokenEstudiante";
 import { verificarTokenProfe } from "../middelwares/autentificacionProfe"; 
-import { CallbackError } from "mongoose";
 
 const adminRoutes = Router();
 
@@ -19,7 +17,7 @@ adminRoutes.get('/todos',(req: Request,res: Response)=>{
 
 
 //Crear Admin
-adminRoutes.post('/crear',verificarTokenProfe,(req: Request,res: Response)=>{
+adminRoutes.post('/crear',(req: Request,res: Response)=>{
     const nombresReq: string = req.body.nombres;
     const apellidosReq: string = req.body.apellidos;
     const documentoReq: string = req.body.documento;

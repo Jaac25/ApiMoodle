@@ -5,14 +5,22 @@ const tareaRutas = Router();
 
 //Crear Usuario
 tareaRutas.post('/crear',(req: Request,res: Response)=>{
-    const tituloReq: string = req.body.tituloReq;
+    const tituloReq: string = req.body.titulo;
     const descripcionReq: string = req.body.descripcion;
     const idMateriaReq: string = req.body.idMateria;
+    const idEstudianteReq: string = req.body.idEstudiante;
+
+    const file = req.file;
 
     const tarea = {
         titulo: tituloReq,
         descripcion: descripcionReq,
-        tarea: idMateriaReq,
+        idMateria: idMateriaReq,
+        idEstudiante: idEstudianteReq,
+        archivo: {
+            fileName: file.filename,
+            url: file.path,
+        }
     };
     
 //Grabar USUARIO en BD
@@ -29,7 +37,7 @@ tareaRutas.post('/crear',(req: Request,res: Response)=>{
     })
 });
 
-//Ver pets
+//Ver materias 
 tareaRutas.get('/todos',(req: Request,res: Response)=>{
     Tarea.find({specialty: req.query.type}).then(function(tarea: any) {
         res.json(tarea);
@@ -48,4 +56,26 @@ tareaRutas.get('/:idMateria',(req: Request,res: Response)=>{
         console.log("Error al mostrar las tareas por materia" + error);
     });
 });
+
+//Mostrar tareas por estudiante
+tareaRutas.get('/:idEstudiante',(req: Request,res: Response)=>{
+    const idEstudiante = req.params.idEstudiante;
+    Tarea.find({idEstudiante: idEstudiante}).then(function(tarea: any) {
+        res.json(tarea);
+    }).catch(function(error: string){
+        console.log("Error al mostrar las tareas por estudiante" + error);
+    });
+});
+
+//Mostrar tareas por estudiante y materia
+tareaRutas.get('/:idEstudiante/:idMateria',(req: Request,res: Response)=>{
+    const idMateria = req.params.idMateria;
+    const idEstudiante = req.params.idEstudiante;
+    Tarea.find({idMateria: idMateria,idEstudiante: idEstudiante}).then(function(tarea: any) {
+        res.json(tarea);
+    }).catch(function(error: string){
+        console.log("Error al mostrar las tareas por estudiante" + error);
+    });
+});
+
 export default tareaRutas;

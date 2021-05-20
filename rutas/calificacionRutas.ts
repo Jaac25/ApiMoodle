@@ -6,7 +6,7 @@ import { verificarTokenProfe } from "../middelwares/autentificacionProfe";
 const calificacionRoutes = Router();
 
 //Crear Calificacion
-calificacionRoutes.post('/crear',verificarTokenProfe,(req: Request,res: Response)=>{
+calificacionRoutes.post('/crear',(req: Request,res: Response)=>{
     const calificacionReq: number = req.body.calificacion;
     const idEstudianteReq: string = req.body.idEstudiante;
     const idMateriaReq: string = req.body.idMateria;
@@ -32,7 +32,7 @@ Calificacion.create(calificacion).then((calificacionDB: any) => {
 });
 
 //Ver calificaciones
-calificacionRoutes.get('/todos',verificarTokenProfe,(req: Request,res: Response)=>{
+calificacionRoutes.get('/todos',(req: Request,res: Response)=>{
     Calificacion.find({specialty: req.query.type}).then(function(calificacion: any) {
         res.json(calificacion);
     }).catch(function(error: string){

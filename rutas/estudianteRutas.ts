@@ -40,7 +40,7 @@ usuarioRutas.post('/crear',(req: Request,res: Response)=>{
 });
 
 //Obtener usuario
-usuarioRutas.get('/mostrar', verificarTokenEstudiante, (req: any, res: Response) => {
+usuarioRutas.get('/mostrar', (req: any, res: Response) => {
     var documento = req.usuario._id;
     Usuario.findOne({_id: documento},(err: any,usuarioDB: any) => {
         if(err) throw err;

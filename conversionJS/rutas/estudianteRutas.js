@@ -6,7 +6,6 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var express_1 = require("express");
 var usuario_1 = require("../modelos/usuario");
 var bcryptjs_1 = __importDefault(require("bcryptjs"));
-var autentificacionEstudiante_1 = require("../middelwares/autentificacionEstudiante");
 var usuarioRutas = express_1.Router();
 //Crear Usuario
 usuarioRutas.post('/crear', function (req, res) {
@@ -38,7 +37,7 @@ usuarioRutas.post('/crear', function (req, res) {
     });
 });
 //Obtener usuario
-usuarioRutas.get('/mostrar', autentificacionEstudiante_1.verificarTokenEstudiante, function (req, res) {
+usuarioRutas.get('/mostrar', function (req, res) {
     var documento = req.usuario._id;
     usuario_1.Usuario.findOne({ _id: documento }, function (err, usuarioDB) {
         if (err)

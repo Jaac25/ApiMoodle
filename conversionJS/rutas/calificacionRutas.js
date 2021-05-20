@@ -2,10 +2,9 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 var express_1 = require("express");
 var calificacion_1 = require("../modelos/calificacion");
-var autentificacionProfe_1 = require("../middelwares/autentificacionProfe");
 var calificacionRoutes = express_1.Router();
 //Crear Calificacion
-calificacionRoutes.post('/crear', autentificacionProfe_1.verificarTokenProfe, function (req, res) {
+calificacionRoutes.post('/crear', function (req, res) {
     var calificacionReq = req.body.calificacion;
     var idEstudianteReq = req.body.idEstudiante;
     var idMateriaReq = req.body.idMateria;
@@ -28,7 +27,7 @@ calificacionRoutes.post('/crear', autentificacionProfe_1.verificarTokenProfe, fu
     });
 });
 //Ver calificaciones
-calificacionRoutes.get('/todos', autentificacionProfe_1.verificarTokenProfe, function (req, res) {
+calificacionRoutes.get('/todos', function (req, res) {
     calificacion_1.Calificacion.find({ specialty: req.query.type }).then(function (calificacion) {
         res.json(calificacion);
     }).catch(function (error) {
