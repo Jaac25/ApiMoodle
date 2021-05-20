@@ -15,22 +15,12 @@ const tareaSchema = new mongoose.Schema<ITarea>({
         type: String,
         required: [true, "El id de materia es obligatorio"]
     },
-    idEstudiante: {
-        type: String,
-        required: [true, "El idEstudiante es obligatorio"]
-    },
-    archivo: {
-        fileName: String,
-        url: String,
-    }
 });
 
 interface ITarea extends Document{
     titulo: string;
     descripcion: string;
     idMateria: string;
-    idEstudiante: string;
-    archivo: {};
 }
 
 export const Tarea = model<ITarea>('Tarea',tareaSchema);

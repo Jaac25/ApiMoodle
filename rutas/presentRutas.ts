@@ -1,27 +1,29 @@
 import { Router, Request, Response} from "express";
-import {Tarea} from '../modelos/tarea';
+import {Presentar} from '../modelos/presentarTarea';
 
-const tareaRutas = Router();
+const presentarRutas = Router();
 
 //Crear Usuario
-tareaRutas.post('/crear',(req: Request,res: Response)=>{
-    const tituloReq: string = req.body.titulo;
-    const descripcionReq: string = req.body.descripcion;
-    const idMateriaReq: string = req.body.idMateria;
+presentarRutas.post('/crear',(req: Request,res: Response)=>{
+    const idTareaReq: string = req.body.idTarea;
+    const idEstudianteReq: string = req.body.idEstudiante;
 
     const file = req.file;
 
     const tarea = {
-        titulo: tituloReq,
-        descripcion: descripcionReq,
-        idMateria: idMateriaReq,
+        idTarea: idTareaReq,
+        idEstudiante: idEstudianteReq,
+        archivo: {
+            fileName: file.filename,
+            url: file.path,
+        }
     };
     
 //Grabar USUARIO en BD
-    Tarea.create(tarea).then((tareaDB: any) => {
+Presentar.create(tarea).then((tareaDB: any) => {
         res.json({
             ok: true,
-            tarea: tareaDB
+            presentada: tareaDB
         })
     }).catch((err: any) => {
         res.json({
@@ -32,8 +34,8 @@ tareaRutas.post('/crear',(req: Request,res: Response)=>{
 });
 
 //Ver materias 
-tareaRutas.get('/todos',(req: Request,res: Response)=>{
-    Tarea.find({specialty: req.query.type}).then(function(tarea: any) {
+presentarRutas.get('/todos',(req: Request,res: Response)=>{
+    Presentar.find({specialty: req.query.type}).then(function(tarea: any) {
         res.json(tarea);
     }).catch(function(error: string){
         console.log("Error al mostrar las tareas" + error);
@@ -42,9 +44,9 @@ tareaRutas.get('/todos',(req: Request,res: Response)=>{
 
 
 //Mostrar tareas por materia
-tareaRutas.get('/:idMateria',(req: Request,res: Response)=>{
+presentarRutas.get('/:idMateria',(req: Request,res: Response)=>{
     const idMateria = req.params.idMateria;
-    Tarea.find({idMateria: idMateria}).then(function(tarea: any) {
+    Presentar.find({idMateria: idMateria}).then(function(tarea: any) {
         res.json(tarea);
     }).catch(function(error: string){
         console.log("Error al mostrar las tareas por materia" + error);
@@ -52,9 +54,9 @@ tareaRutas.get('/:idMateria',(req: Request,res: Response)=>{
 });
 
 //Mostrar tareas por estudiante
-tareaRutas.get('/:idEstudiante',(req: Request,res: Response)=>{
+presentarRutas.get('/:idEstudiante',(req: Request,res: Response)=>{
     const idEstudiante = req.params.idEstudiante;
-    Tarea.find({idEstudiante: idEstudiante}).then(function(tarea: any) {
+    Presentar.find({idEstudiante: idEstudiante}).then(function(tarea: any) {
         res.json(tarea);
     }).catch(function(error: string){
         console.log("Error al mostrar las tareas por estudiante" + error);
@@ -62,14 +64,14 @@ tareaRutas.get('/:idEstudiante',(req: Request,res: Response)=>{
 });
 
 //Mostrar tareas por estudiante y materia
-tareaRutas.get('/:idEstudiante/:idMateria',(req: Request,res: Response)=>{
+presentarRutas.get('/:idEstudiante/:idMateria',(req: Request,res: Response)=>{
     const idMateria = req.params.idMateria;
     const idEstudiante = req.params.idEstudiante;
-    Tarea.find({idMateria: idMateria,idEstudiante: idEstudiante}).then(function(tarea: any) {
+    Presentar.find({idMateria: idMateria,idEstudiante: idEstudiante}).then(function(tarea: any) {
         res.json(tarea);
     }).catch(function(error: string){
         console.log("Error al mostrar las tareas por estudiante" + error);
     });
 });
 
-export default tareaRutas;
+export default presentarRutas;
