@@ -13,6 +13,7 @@ import tareaRutas from './rutas/tareaRutas';
 import multer from 'multer';
 import path from 'path';
 import presentarRutas from './rutas/presentRutas';
+import calificacionRoutes from './rutas/calificacionRutas';
 
 const server = new Server();
 const config = require("./config");
@@ -43,6 +44,7 @@ server.app.use('/profe',profeRoutes);
 server.app.use('/materia',materiaRutas);
 server.app.use('/tarea',tareaRutas);
 server.app.use('/presentar',presentarRutas);
+server.app.use('/calificacion',calificacionRoutes);
 
     //Public
     
