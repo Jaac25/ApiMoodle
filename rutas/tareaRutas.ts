@@ -8,9 +8,7 @@ tareaRutas.post('/crear',(req: Request,res: Response)=>{
     const tituloReq: string = req.body.titulo;
     const descripcionReq: string = req.body.descripcion;
     const idMateriaReq: string = req.body.idMateria;
-
-    const file = req.file;
-
+    
     const tarea = {
         titulo: tituloReq,
         descripcion: descripcionReq,
