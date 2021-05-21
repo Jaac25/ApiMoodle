@@ -19,13 +19,5 @@ var tareaSchema = new mongoose_2.default.Schema({
         type: String,
         required: [true, "El id de materia es obligatorio"]
     },
-    idEstudiante: {
-        type: String,
-        required: [true, "El idEstudiante es obligatorio"]
-    },
-    archivo: {
-        fileName: String,
-        url: String,
-    }
 });
 exports.Tarea = mongoose_1.model('Tarea', tareaSchema);

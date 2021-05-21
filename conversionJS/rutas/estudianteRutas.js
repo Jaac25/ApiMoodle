@@ -39,6 +39,7 @@ usuarioRutas.post('/crear', function (req, res) {
 //Obtener usuario
 usuarioRutas.get('/mostrar', function (req, res) {
     var documento = req.usuario._id;
+    console.log(req.usuario);
     usuario_1.Usuario.findOne({ _id: documento }, function (err, usuarioDB) {
         if (err)
             throw err;

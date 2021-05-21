@@ -15,6 +15,7 @@ var materiaRutas_1 = __importDefault(require("./rutas/materiaRutas"));
 var tareaRutas_1 = __importDefault(require("./rutas/tareaRutas"));
 var multer_1 = __importDefault(require("multer"));
 var path_1 = __importDefault(require("path"));
+var presentRutas_1 = __importDefault(require("./rutas/presentRutas"));
 var server = new server_1.default();
 var config = require("./config");
 //Body parser
@@ -38,6 +39,7 @@ server.app.use('/estudiante', estudianteRutas_1.default);
 server.app.use('/profe', profeRoutes_1.default);
 server.app.use('/materia', materiaRutas_1.default);
 server.app.use('/tarea', tareaRutas_1.default);
+server.app.use('/presentar', presentRutas_1.default);
 //Public
 server.app.use('/', express_1.default.static(path_1.default.join(__dirname, 'public'))).get('/archivo/:archivoName', function (req, res) {
     var archivoName = req.params.archivoName;
