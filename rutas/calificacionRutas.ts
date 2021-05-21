@@ -9,7 +9,7 @@ const calificacionRoutes = Router();
 calificacionRoutes.post('/crear',(req: Request,res: Response)=>{
     const calificacionReq: number = req.body.calificacion;
     const idEstudianteReq: string = req.body.idEstudiante;
-    const idMateriaReq: string = req.body.idMateria;
+    const idMateriaReq: string = req.body.idTarea;
 
     const calificacion = {
         calificacion: calificacionReq,

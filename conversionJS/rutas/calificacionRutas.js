@@ -7,7 +7,7 @@ var calificacionRoutes = express_1.Router();
 calificacionRoutes.post('/crear', function (req, res) {
     var calificacionReq = req.body.calificacion;
     var idEstudianteReq = req.body.idEstudiante;
-    var idMateriaReq = req.body.idMateria;
+    var idMateriaReq = req.body.idTarea;
     var calificacion = {
         calificacion: calificacionReq,
         idEstudiante: idEstudianteReq,
